@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Property</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url(../static/house-bg.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        
+        #loader {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            background-color: #000;
+            z-index: 999;
+            top: 0;
+            transition: all ease 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #loader h1 {
+            color: transparent;
+            background: linear-gradient(to right, orange, orangered);
+            font-size: 2vw;
+            -webkit-background-clip: text;
+            position: absolute;
+            opacity: 0;
+            animation-name: load;
+            animation-duration: 1s;
+            animation-delay: 1s;
+            z-index: 999;
+            animation-timing-function: linear;
+        }
+
+        #loader h1:nth-child(2) {
+            animation-delay: 2s;
+        }
+
+        #loader h1:nth-child(3) {
+            animation-delay: 3s;
+        }
+
+        #loader h1:nth-child(4) {
+            animation-delay: 4s;
+        }
+
+        @keyframes load {
+            0% {
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.8;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
+
+        #head-phrase {
+            margin-bottom: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #ffcc00b2; /* Yellow color */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow */
+        }
+
+        #head-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #fff;
+            margin: 6vw;
+            padding: 3vw;
+        }
+
+        .auth-link {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .auth-link:hover {
+            background-color: #0056b3;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #007bff; /* Blue border color */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue tint box shadow */
+        }
+
+        button[type="submit"] {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="loader">
+        <h1>Discover Your Space.</h1>
+        <h1>Experience Exceptional Living.</h1>
+        <h1>Welcome To Our Premier Real Estate Portal.</h1>
+        <h1>Your Dream Home Awaits...</h1>
+    </div> -->
+
+    <!-- <div class="video-container">
+        <video autoplay muted loop>
+            <source src="{{ url_for('static', filename='videos/home-video-final.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div> -->
+
+    <div class="content">
+        <h1 id="head">Unlock Luxurious Living: Welcome to EstateSphere</h1>
+        <h1 id="head-phrase">Unlocking Property Potential: Your Gateway to Success!</h1>
+        <p id="head-text">Welcome to our Real Estate platform, where real estate management meets 
+            digital convenience. Whether you're a property owner or a potential tenant, our platform empowers 
+            you to list, discover, and manage properties with ease. Say goodbye to the complexities of property
+             management and hello to organized real estate bliss. Join our community of property enthusiasts and 
+             embark on a seamless journey like never before. Get ready to find your perfect property or tenant and 
+             revolutionize your property management experience!
+        </p>
+        <a class="auth-link" href="{{ url_for('view_property_client') }}">View Properties</a>
+
+        <form action="{{ url_for('view_by_place') }}" method="post">
+            <label for="property_address">Search by Address:</label>
+            <input type="text" id="property_address" name="property_address" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <script>
+        var flag = false;
+
+        if (!flag) 
+        {
+            var loader = document.getElementById("loader");
+            setTimeout(function() {
+                loader.style.top = "-100%";
+                flag = true;
+            }, 4900);
+        }
+    </script>
+
+</body>
+</html>

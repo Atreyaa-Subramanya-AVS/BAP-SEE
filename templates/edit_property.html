@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Property {{property['id']}}</title>
+    <style>
+        @font-face
+        {
+            font-family: Font-Main;
+            src: url(../TitilliumWeb-Regular.ttf);
+        }
+        body
+        {
+            margin-left:6vw;
+            margin-top:2.5vw;
+            background-image: url(../static/edit-recipe.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        form {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 10vw;
+            padding: 2vw;
+            /* display: flex; */
+            justify-content: center;
+            align-items: center;
+            height: auto;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            /* height:70vh; */
+            max-width: 3000px;
+            box-sizing: border-box;
+            display: flex;
+            height: auto;
+            flex-direction: row;
+        }
+
+        form {
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow:5px 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        input[type="file"] {
+            width: calc(100% - 20px);
+            padding: 8px 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            overflow: hidden;
+            resize: none;
+            font-family: Font-Main;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            outline: none;
+            height: 150px;
+            font-size: x-large;
+        }
+
+        input{
+            font-family: Font-Main;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        textarea:focus,input:focus
+        {
+            border-color: #66afe9;
+            box-shadow: 0 0 5px rgba(102,175,233,0.5);
+        }
+
+        input[type="submit"] {
+            background: #5cb85c;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        input[type="submit"]:hover {
+            background: #4cae4c;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        #box1 {
+            background-color: #e0e0e0;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            flex: 3;
+            /* height: 80vh; */
+        }
+
+        #box2 {
+            background-color: #c0c0c0;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: space-between; 
+        }
+
+        #box2 img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1vw;
+        }
+
+        input[type="text"],
+        input[type="number"]
+        {
+            font-size: x-large;
+        }
+
+        input[type="file"]
+        {
+            font-size: 1.5vw;
+            display: none;
+        }
+
+        .custom-file-input
+        {
+            display: inline-block;
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-file-input span
+        {
+            font-size:10px;
+        }
+
+        .custom-file-input:hover {
+            background-color: #4cae4c;
+        }
+
+        #box1 h1
+        {
+            font-size: 2vw;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div id="box1">
+        <h1>Edit Property (ID:{{property['id']}})</h1>
+        <form id="propertyForm" action="{{ url_for('edit_property', property_id=property['id']) }}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" required value="{{property['description']}}">
+            </div>
+            <div class="form-group">
+                <label for="dimensions">Dimensions:</label>
+                <input type="text" id="dimensions" name="dimensions" required value="{{property['dimensions']}}">
+            </div>
+            <div class="form-group">
+                <label for="facing">Facing:</label>
+                <input type="text" id="facing" name="facing" required value="{{property['facing']}}">
+            </div>
+            <div class="form-group">
+                <label for="property_type">Property Type:</label>
+                <input type="text" id="property_type" name="property_type" required value="{{property['property_type']}}">
+            </div>
+            <div class="form-group">
+                <label for="rent">Rent:</label>
+                <input type="number" id="rent" name="rent" required value="{{property['rent']}}">
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" required >{{property['address']}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="parking">Parking:</label>
+                <input type="text" id="parking" name="parking" required value="{{property['parking']}}">
+            </div>
+            <div class="form-group">
+                <label for="bhk">BHK:</label>
+                <input type="number" id="bhk" name="bhk" required value="{{property['bhk']}}">
+            </div>
+            <div class="form-group">
+                <label for="overlooking">Overlooking:</label>
+                <input type="text" id="overlooking" name="overlooking" required value="{{property['overlooking']}}">
+            </div>
+            <div class="form-group">
+                <label for="floors">Floors:</label>
+                <input type="number" id="floors" name="floors" required value="{{property['floors']}}">
+            </div>
+            <div class="form-group">
+                <label for="furnishing">Furnishing:</label>
+                <input type="text" id="furnishing" name="furnishing" required value="{{property['furnishing']}}">
+            </div>
+            <div class="form-group">
+                <label for="amenities">Amenities:</label>
+                <input type="text" id="amenities" name="amenities" required value="{{property['amenities']}}">
+            </div>
+            <div class="form-group">
+                <label for="flooring">Flooring:</label>
+                <input type="text" id="flooring" name="flooring" required value="{{property['flooring']}}">
+            </div>
+            <div class="form-group">
+                <label for="climate_control">Heating/Cooling:</label>
+                <input type="text" id="climate_control" name="climate_control" required value="{{property['climate_control']}}">
+            </div>
+            <div class="form-group">
+                <label for="balcony">Balcony:</label>
+                <input type="text" id="balcony" name="balcony" required value="{{property['balcony']}}">
+            </div>
+            <div class="form-group">
+                <label for="ups">UPS:</label>
+                <input type="text" id="ups" name="ups" required value="{{property['ups']}}">
+            </div>
+
+            <div class="form-group">
+                <label for="img1" class="custom-file-input">Upload New Image 1 <span>(if needed)</span></label>
+                <input type="file" id="img1" name="img1">
+                <input type="hidden" name="current_img1_path" value="{{ property['img1_path'] }}">
+            </div>
+            <div class="form-group">
+                <label for="img2" class="custom-file-input">Upload New Image 2 <span>(if needed)</span></label>
+                <input type="file" id="img2" name="img2">
+                <input type="hidden" name="current_img2_path" value="{{ property['img2_path'] }}">
+            </div>
+            <div class="form-group">
+                <label for="img3" class="custom-file-input">Upload New Image 3 <span>(if needed)</span></label>
+                <input type="file" id="img3" name="img3">
+                <input type="hidden" name="current_img2_path" value="{{ property['img3_path'] }}">
+            </div>
+            <div class="form-group">
+                <label for="img4" class="custom-file-input">Upload New Image 4 <span>(if needed)</span></label>
+                <input type="file" id="img4" name="img4">
+                <input type="hidden" name="current_img2_path" value="{{ property['img2_path'] }}">
+            </div>
+            <div class="form-group">
+                <label for="img5" class="custom-file-input">Upload New Image 5 <span>(if needed)</span></label>
+                <input type="file" id="img5" name="img5">
+                <input type="hidden" name="current_img2_path" value="{{ property['img2_path'] }}">
+            </div>
+            <div class="form-group">
+                <label for="img5" class="custom-file-input">Upload New Image 6 <span>(if needed)</span></label>
+                <input type="file" id="img6" name="img6">
+                <input type="hidden" name="current_img2_path" value="{{ property['img2_path'] }}">
+            </div>
+            <input type="submit" value="Update Property" style="margin-left: 13vw;scale: 1.3;">
+        </form>
+        </div>
+        <div id="box2">
+            <img src="/{{ property['img1_path'] }}" alt="{{ property['id'] }} Image 1">
+            <img src="/{{ property['img2_path'] }}" alt="{{ property['id'] }} Image 2">
+            <img src="/{{ property['img3_path'] }}" alt="{{ property['id'] }} Image 3">
+            <img src="/{{ property['img4_path'] }}" alt="{{ property['id'] }} Image 4">
+            <img src="/{{ property['img5_path'] }}" alt="{{ property['id'] }} Image 5">
+            <img src="/{{ property['img6_path'] }}" alt="{{ property['id'] }} Image 6">
+        </div>
+    </div>
+    <script>
+        function adjustContainerHeight() {
+            const form = document.getElementById('propertyForm');
+            const container = document.getElementById('container');
+            const box1 = document.querySelector('.container #box1')
+            container.style.height = form.scrollHeight + 260 + 'px';
+        }
+    
+        document.addEventListener('input', function (event) {
+            if (event.target.tagName.toLowerCase() === 'textarea' || event.target.tagName.toLowerCase() === 'input') {
+                event.target.style.height = 'auto';
+                event.target.style.height = (event.target.scrollHeight) + 'px';
+                adjustContainerHeight();
+            }
+        }, false);
+    
+        document.addEventListener('change', function (event) {
+            if (event.target.tagName.toLowerCase() === 'textarea' || event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'select') {
+                adjustContainerHeight();
+            }
+        }, false);
+    
+        window.addEventListener('resize', adjustContainerHeight);
+    
+        // Initialize textareas and set initial container height
+        window.onload = function() {
+            document.querySelectorAll('textarea').forEach(textarea => {
+                textarea.style.height = textarea.scrollHeight + 'px';
+            });
+            adjustContainerHeight();
+        };
+    </script>
+    
+</body>
+</html>

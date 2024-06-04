@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Properties</title>
+    <style>
+        @font-face {
+            font-family: Font-Main;
+            src: url(../TitilliumWeb-Regular.ttf);
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            font-family: Titillium;
+            background-image: url(../static/house-bg.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.3);
+            z-index: -1;
+        }
+
+        #head {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: -1vw;
+            color: #fff;
+            font-size: 3.5vw;
+        }
+
+        .property-card {
+            margin: 3vw;
+            height: auto;
+            width: 20vw;
+            border-radius: 15px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            display: inline-block;
+            vertical-align: top;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .property-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .property-card img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .property-details {
+            padding: 1vw;
+        }
+
+        .property-details p {
+            margin: 0.6vw 0;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="head">Properties</h1>
+    {% for property in properties %}
+    <div class="property-card" data-id="{{ property['id'] }}">
+        <img src="{{ property['img1_path'] }}" alt="{{ property['id'] }}">
+        <div class="property-details" style="margin-top: -1.25vw;">
+            <p style="font-weight: 500;font-size: large;">ID: {{ property['id'] }}</p>
+            <p>{{ property['description'] }}</p>
+            <p>{{ property['bhk'] }}</p>
+            <p>{{ property['rent'] }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    <script>
+        document.querySelectorAll('.property-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.getAttribute('data-id');
+                window.location.href = `/property/${id}`;
+            });
+        });
+    </script>
+</body>
+</html>

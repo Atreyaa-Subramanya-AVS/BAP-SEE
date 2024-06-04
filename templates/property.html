@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property {{property['id']}}</title>
+    <style>
+        body {
+            margin-left: 4vw;
+            margin-top: 2.5vw;
+            font-family: Arial, sans-serif;
+            background-image: url(../static/add-image.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container {
+            background: #fff;
+            margin-left: 5vw;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 3000px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        #property_head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: #f4f4f4;
+            margin-right: 2vw;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 98%;
+        }
+
+        #property_details {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        #image_1 {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .other-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            /* width: 100%; */
+        }
+
+        .other-images img {
+            
+            width: 30%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .prop-details {
+            background-color: #f4f4f4;
+            margin-left: 1vw;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            margin-top: 20px;
+        }
+
+        .prop-details p {
+            color: #555;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .prop-details .heading {
+            font-weight: bold;
+        }
+        #image_5,#image_6
+        {
+            margin-left:8vw;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="property_head">
+            <div id="property_details">
+                <h2><strong>Description:</strong> {{property['description']}}</h2>
+                <h2><strong>Property Type:</strong> {{property['property_type']}}</h2>
+                <h2><strong>Address:</strong> {{property['address']}}</h2>
+            </div>
+            {% if property['img1_path'] %}
+                <img src="/{{property['img1_path']}}" alt="{{ property['id'] }} Image 1" id="image_1">
+            {% endif %}
+        </div>
+        <div class="other-images">
+            {% if property['img2_path'] %}
+                <img src="/{{property['img2_path']}}" alt="{{ property['id'] }} Image 2" id="image_2">
+            {% endif %}
+            {% if property['img3_path'] %}
+                <img src="/{{property['img3_path']}}" alt="{{ property['id'] }} Image 3" id="image_3">
+            {% endif %}
+            {% if property['img4_path'] %}
+                <img src="/{{property['img4_path']}}" alt="{{ property['id'] }} Image 4" id="image_4">
+            {% endif %}
+            {% if property['img5_path'] %}
+                <img src="/{{property['img5_path']}}" alt="{{ property['id'] }} Image 5" id="image_5">
+            {% endif %}
+            {% if property['img6_path'] %}
+                <img src="/{{property['img6_path']}}" alt="{{ property['id'] }} Image 6" id="image_6">
+            {% endif %}
+        </div>
+        <div class="prop-details">
+            <p class="heading"><strong>Dimensions:</strong> {{ property['dimensions'] }} sq. ft</p>
+            <p class="heading"><strong>Facing:</strong> {{ property['facing'] }}</p>
+            <p class="heading"><strong>Rent:</strong> {{ property['rent'] }}</p>
+            <p class="heading"><strong>Parking:</strong>{{ property['parking'] }}</p>
+            <p class="heading"><strong>BHK:</strong>{{ property['bhk'] }}</p>
+            <p class="heading"><strong>Overlooking:</strong>{{ property['overlooking'] }}</p>
+            <p class="heading"><strong>Floors:</strong>{{ property['floors'] }}</p>
+            <p class="heading"><strong>Amenities:</strong>{{ property['amenities'] }}</p>
+            <p class="heading"><strong>Flooring:</strong>{{ property['flooring'] }}</p>
+            <p class="heading"><strong>Heating/Cooling:</strong>{{ property['climate_control'] }}</p>
+            <p class="heading"><strong>Balcony:</strong>{{ property['balcony'] }}</p>
+            <p class="heading"><strong>UPS:</strong>{{ property['ups'] }}</p>
+        </div>
+    </div>
+</body>
+</html>
